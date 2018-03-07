@@ -1,0 +1,45 @@
+#ifndef MYTHREAD_H
+#define MYTHREAD_H
+
+#include <QThread>
+
+class MyThread : public QThread {
+
+private:
+
+public:
+
+    /**
+     * \brief MyThread Constructeur simple
+     * \param paramNbIterations Nombre d'itérations à effectuer
+     * \param threadName Nom du thread. Utile pour le debug
+     * \param parent Objet parent du thread
+     */
+    explicit MyThread(const QString &threadName, QObject *parent = 0);
+    
+    /**
+     * @brief initialize Méthode statique appelée avant le lancement des threads
+     * @param nbThreads Nombre de threads qui seront créés
+     * Cette méthode est appelée avant que les différents threads ne soient créés.
+     * Elle modifie la valeur de nbThreads, mais pourrait être modifiée pour y
+     * placer d'autres éléments.
+     */
+    static void initialize();
+    
+    
+    //A redefinir: la signature, savoir si le retour doit permettre
+    //de passer des res des calcules pour le render ou si on peut y acceder
+    //sans en avoir besoin
+    /**
+     * @brief 
+     * @param min est la borne inferieur de l'axe x, resp y, dans laquelle
+     * doit etre effectue le calcul, max est la borne superieure de l'axe
+     * x, resp y, dans laquelle doit etre effectue le calcul
+     */
+    void run(int minX, int maxX, int minY, int maxY);
+
+
+};
+
+
+#endif // MYTHREAD_H
